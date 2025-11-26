@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* --------------------
+   1. Global & Variables
+   -------------------- */
+:root {
+  --color-bg: #fdfae9; /* Off-White Cream */
+  --color-accent: #8b5e3c; /* Rich Bronze/Brown */
+  --color-accent-light: #c49a6c;
+  --color-text: #2c2c2c;
+  --color-muted: #6a6a6a;
+  --color-card: rgba(255, 255, 255, 0.95);
+  --color-section-bg: rgba(255, 255, 255, 0.6);
+  --shadow-lg: 0 16px 30px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Reset & Base */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  background: linear-gradient(180deg, var(--color-bg), #f5e0c3);
+  color: var(--color-text);
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* --------------------
+   2. Menu Structure
+   -------------------- */
+.menu-wrap {
+  width: 100%;
+  max-width: 580px;
+  background: var(--color-card);
+  border-radius: 36px;
+  padding: 30px 24px;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(15px);
+  animation: menuIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes menuIn { from { transform: translateY(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Brand & Header (New Text) */
+.brand {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.brand h1 {
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--color-accent);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+.brand p {
+  font-size: 16px;
+  color: var(--color-muted);
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+/* --------------------
+   3. Category Filters
+   -------------------- */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 30px;
+  padding: 8px;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 25px;
+  background: var(--color-section-bg);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(139, 94, 60, 0.4);
+}
+.filter-btn.active .filter-icon { color: #fff; }
+.filter-icon {
+    font-size: 18px;
+    transition: color 0.3s ease;
+    color: var(--color-accent);
+}
+
+
+/* --------------------
+   4. Menu Categories & Items
+   -------------------- */
+.category {
+  margin-bottom: 40px;
+  /* Hidden by default, shown by JS/filter */
+  display: none; 
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+/* Re-enable animation for the first visible category */
+.category.active-cat {
+    display: block !important; /* Override 'display: none' */
+    opacity: 1; 
+    transform: none; 
+}
+@keyframes slideIn { to { opacity: 1; transform: none; } }
+
+.cat-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 18px;
+  padding-right: 10px;
+  border-right: 4px solid var(--color-accent); 
+}
+
+/* Item Card - Clean, Divided */
+.item-card {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  border-radius: 18px;
+  margin-top: 10px;
+  background: var(--color-section-bg);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.item-card:active {
+  transform: scale(0.99);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.item-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--color-text);
+}
+
+.price-wrap {
+    text-align: left; 
+}
+.price {
+  font-weight: 800;
+  color: var(--color-accent);
+  font-size: 19px;
+  margin-right: 0;
+}
+
+/* Details Dropdown */
+.details-dropdown {
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: var(--color-muted);
+  font-weight: 500;
+  line-height: 1.6;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s ease-out;
+}
+
+.item-card.expanded .details-dropdown {
+  max-height: 100px; 
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<div class="menu-wrap">
+
+<div class="brand">
+  <h1>منو کافه</h1>
+  <p>تجربه‌ای دلنشین از نوشیدنی‌های تازه و میان‌وعده‌های باکیفیت. خوش آمدید!</p>
+</div>
+
+<div class="filter-bar">
+  <div class="filter-btn" data-filter="hot"><span class="filter-icon">☕</span> گرم</div>
+  <div class="filter-btn" data-filter="cold"><span class="filter-icon">🧊</span> سرد</div>
+  <div class="filter-btn" data-filter="dessert"><span class="filter-icon">🍰</span> دسر</div>
+</div>
+
+<div class="menu-content">
+  <div class="category" id="hot" data-category="hot">
+    <div class="cat-title">نوشیدنی‌های گرم</div>
+    <div class="items">
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">قهوه تک 50%</div></div>
+          <div class="price-wrap"><div class="price">45 ت</div></div>
+        </div>
+        <div class="details-dropdown">خالص و سبک. یک شات اسپرسو با آب داغ. مناسب برای شروع روز.</div>
+      </div>
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">قهوه دوبل 50%</div></div>
+          <div class="price-wrap"><div class="price">65 ت</div></div>
+        </div>
+        <div class="details-dropdown">شدیدتر و عمیق‌تر. دو شات اسپرسو برای انرژی مضاعف.</div>
+      </div>
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">هات چاکلت</div></div>
+          <div class="price-wrap"><div class="price">60 ت</div></div>
+        </div>
+        <div class="details-dropdown">غلیظ و شیرین، با استفاده از پودر کاکائو با کیفیت و شیر تازه.</div>
+      </div>
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">چای سیاه ایرانی</div></div>
+          <div class="price-wrap"><div class="price">20 ت</div></div>
+        </div>
+        <div class="details-dropdown">ویژه و طبیعی. با هل و گل سرخ (قابل سفارش).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="category" id="cold" data-category="cold">
+    <div class="cat-title">نوشیدنی‌های سرد</div>
+    <div class="items">
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">آیس آمریکانو</div></div>
+          <div class="price-wrap"><div class="price">60 ت</div></div>
+        </div>
+        <div class="details-dropdown">تند و خنک. ترکیب اسپرسو و آب سرد.</div>
+      </div>
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">آیس لاته</div></div>
+          <div class="price-wrap"><div class="price">48 ت</div></div>
+        </div>
+        <div class="details-dropdown">لطیف و سرد. شیر خنک با یک شات اسپرسو.</div>
+      </div>
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">لیموناد نعنا</div></div>
+          <div class="price-wrap"><div class="price">70 ت</div></div>
+        </div>
+        <div class="details-dropdown">تازه و طراوت‌بخش. لیمو، آب گازدار و نعناع تازه.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="category" id="dessert" data-category="dessert">
+    <div class="cat-title">دسر و میان‌وعده</div>
+    <div class="items">
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">چیزکیک کلاسیک</div></div>
+          <div class="price-wrap"><div class="price">60 ت</div></div>
+        </div>
+        <div class="details-dropdown">خامه‌ای و خوش‌طعم. با رویه سس بلوبری یا توت‌فرنگی (انتخابی).</div>
+      </div>
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">براونی شکلاتی</div></div>
+          <div class="price-wrap"><div class="price">30 ت</div></div>
+        </div>
+        <div class="details-dropdown">گرم و دلچسب. مغز شکلاتی آب شده، ایده‌آل با بستنی.</div>
+      </div>
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">کیک روز</div></div>
+          <div class="price-wrap"><div class="price">70 ت</div></div>
+        </div>
+        <div class="details-dropdown">اسفنجی / هویج / شکلاتی. روزانه تغییر می‌کند.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const categories = document.querySelectorAll('.category');
+  const items = document.querySelectorAll('.item-card');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const menuContent = document.querySelector('.menu-content');
+  const defaultCategory = 'hot'; // Set default category to 'hot'
+
+  // 1. Initial Category Animation Delay
+  categories.forEach((el, i) => {
+    el.style.animationDelay = (i * 0.1) + 's';
+  });
+
+  // 2. Item Details (Accordion)
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      // Toggle current item's details
+      item.classList.toggle('expanded');
+    });
+  });
+
+  // 3. Filtering Logic (Simplified)
+  const filterCategories = (filter) => {
+    // Remove active state and hide all categories
+    categories.forEach(cat => {
+      cat.classList.remove('active-cat');
+    });
+    filterBtns.forEach(b => b.classList.remove('active'));
+
+    // Find and show the target category
+    const targetCat = document.querySelector(`.category[data-category="${filter}"]`);
+    const targetBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+
+    if (targetCat) {
+      targetCat.classList.add('active-cat'); // Uses the CSS class to show and animate
+      if (targetBtn) {
+          targetBtn.classList.add('active');
+      }
+      // Smooth scroll to the top of the menu content area
+      menuContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+      filterCategories(filter);
+    });
+  });
+  
+  // 4. Initial Load: Show the default category (HOT)
+  filterCategories(defaultCategory);
+
+});
+</script>
+</body>
+</html>
