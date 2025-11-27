@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>منو کافه - بک‌گراند داینامیک و واضح</title>
+<title>منو کافه - به‌روزرسانی بخش گرم</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* --------------------
@@ -18,34 +18,30 @@
   --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.06);
 
   /* --- متغیرهای پیش‌فرض (اینها در .theme-hot تعریف می‌شوند) --- */
-  /* حالا اینها فقط به عنوان fallback عمل می‌کنند اگر کلاسی به body نخورد */
   --color-accent: #A67B5B; 
   --bg-start: #FDFCF8;
   --bg-end: #E8DCCA;
 }
 
 /* --- تم گرم (Hot) --- */
-/* این کلاس به body اضافه می‌شود و رنگ‌های گرم را اعمال می‌کند */
 body.theme-hot {
   --color-accent: #A67B5B; /* قهوه‌ای ملایم و خاکی */
-  --bg-start: #FFF5E1; /* شروع گرادینت گرم */
-  --bg-end: #EED5B7;   /* پایان گرادینت گرم */
+  --bg-start: #FFF5E1; 
+  --bg-end: #EED5B7;   
 }
 
 /* --- تم سرد (Cold) --- */
-/* این کلاس به body اضافه می‌شود و رنگ‌های سرد را اعمال می‌کند */
 body.theme-cold {
     --color-accent: #5F9EA0; /* آبی کدر/سبز دریایی ملایم - چشم‌نواز */
-    --bg-start: #E0F7FA; /* شروع گرادینت سرد */
-    --bg-end: #B2EBF2;   /* پایان گرادینت سرد */
+    --bg-start: #E0F7FA; 
+    --bg-end: #B2EBF2;   
 }
 
 /* --- تم غذا (Food) --- */
-/* این کلاس به body اضافه می‌شود و رنگ‌های غذا را اعمال می‌کند */
 body.theme-food {
     --color-accent: #C86B4D; /* رنگ آجری/تراکوتا - گرم و اشتهاآور اما ملایم */
-    --bg-start: #FFF3E0; /* شروع گرادینت غذا */
-    --bg-end: #FFCCBC;   /* پایان گرادینت غذا */
+    --bg-start: #FFF3E0; 
+    --bg-end: #FFCCBC;   
 }
 
 
@@ -53,7 +49,6 @@ body.theme-food {
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'Vazirmatn', sans-serif;
-  /* استفاده از متغیرها برای گرادینت پس‌زمینه کل صفحه */
   background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
   color: var(--color-text);
   display: flex;
@@ -61,7 +56,6 @@ body {
   padding: 20px 15px;
   min-height: 100vh;
   overflow-x: hidden;
-  /* ترانزیشن بسیار نرم برای تغییر پس‌زمینه */
   transition: background 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
@@ -78,7 +72,6 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   animation: menuIn 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-  /* ترانزیشن برای تغییرات داخلی (رنگ اکسنت‌ها) */
   transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 @keyframes menuIn { from { transform: translateY(30px) scale(0.98); opacity: 0; } to { transform: none; opacity: 1; } }
@@ -269,6 +262,13 @@ body {
     <div class="items">
       <div class="item-card">
         <div class="item-main">
+          <div class="name-details"><div class="name">اسپرسو</div></div>
+          <div class="price-wrap"><div class="price">90 ت</div></div>
+        </div>
+        <div class="details-dropdown">یک شات اسپرسو غلیظ و معطر، مخصوص کسانی که طعم اصیل قهوه را می‌پسندند.</div>
+      </div>
+      <div class="item-card">
+        <div class="item-main">
           <div class="name-details"><div class="name">قهوه تک 50%</div></div>
           <div class="price-wrap"><div class="price">45 ت</div></div>
         </div>
@@ -280,6 +280,34 @@ body {
           <div class="price-wrap"><div class="price">65 ت</div></div>
         </div>
         <div class="details-dropdown">شدیدتر و عمیق‌تر. دو شات اسپرسو برای انرژی مضاعف.</div>
+      </div>
+       <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">چای ایرانی با نبات</div></div>
+          <div class="price-wrap"><div class="price">30 ت</div></div>
+        </div>
+        <div class="details-dropdown">چای سیاه خوش‌عطر ایرانی، همراه با نبات زعفرانی برای یک عصر دلنشین.</div>
+      </div>
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">کاپوچینو</div></div>
+          <div class="price-wrap"><div class="price">50 ت</div></div>
+        </div>
+        <div class="details-dropdown">ترکیبی متعادل از اسپرسو، شیر بخارپز و لایه‌ای غنی از فوم شیر.</div>
+      </div>
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">چای کرک</div></div>
+          <div class="price-wrap"><div class="price">40 ت</div></div>
+        </div>
+        <div class="details-dropdown">چای شیری پرادویه، یک نوشیدنی گرم و انرژی‌بخش با اصالت عربی.</div>
+      </div>
+      <div class="item-card">
+        <div class="item-main">
+          <div class="name-details"><div class="name">چای بابل</div></div>
+          <div class="price-wrap"><div class="price">70 ت</div></div>
+        </div>
+        <div class="details-dropdown">چای محبوب تایوانی با مرواریدهای تاپیوکا، تجربه‌ای خاص و متفاوت.</div>
       </div>
       <div class="item-card">
         <div class="item-main">
@@ -369,7 +397,7 @@ body {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const menuWrap = document.querySelector('.menu-wrap'); // این المنت برای تغییرات داخلی منو استفاده می‌شود
+  const menuWrap = document.querySelector('.menu-wrap'); 
   const categories = document.querySelectorAll('.category');
   const items = document.querySelectorAll('.item-card');
   const filterBtns = document.querySelectorAll('.filter-btn');
@@ -421,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Apply Theme Classes for Dynamic Background & Colors
     // اینجا هر دو المنت body و menuWrap را هدف قرار می‌دهیم
     document.body.classList.remove('theme-hot', 'theme-cold', 'theme-food');
-    menuWrap.classList.remove('theme-hot', 'theme-cold', 'theme-food'); // برای رنگ‌های داخلی منو
+    menuWrap.classList.remove('theme-hot', 'theme-cold', 'theme-food'); 
 
     if (filter === 'hot') {
         document.body.classList.add('theme-hot');
