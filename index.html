@@ -3,35 +3,66 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Menu</title>
+<title>منو کافه - بک‌گراند داینامیک و واضح</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* --------------------
-   1. Global & Variables
+   1. Global & Variables & Themes
    -------------------- */
 :root {
-  --color-bg: #fdfae9; /* Off-White Cream */
-  --color-accent: #8b5e3c; /* Rich Bronze/Brown */
-  --color-accent-light: #c49a6c;
   --color-text: #2c2c2c;
-  --color-muted: #6a6a6a;
-  --color-card: rgba(255, 255, 255, 0.95);
-  --color-section-bg: rgba(255, 255, 255, 0.6);
-  --shadow-lg: 0 16px 30px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 6px 15px rgba(0, 0, 0, 0.05);
+  --color-muted: #7a7a7a;
+  --color-card: rgba(255, 255, 255, 0.92);
+  --color-section-bg: rgba(255, 255, 255, 0.7);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.06);
+
+  /* --- متغیرهای پیش‌فرض (اینها در .theme-hot تعریف می‌شوند) --- */
+  /* حالا اینها فقط به عنوان fallback عمل می‌کنند اگر کلاسی به body نخورد */
+  --color-accent: #A67B5B; 
+  --bg-start: #FDFCF8;
+  --bg-end: #E8DCCA;
 }
+
+/* --- تم گرم (Hot) --- */
+/* این کلاس به body اضافه می‌شود و رنگ‌های گرم را اعمال می‌کند */
+body.theme-hot {
+  --color-accent: #A67B5B; /* قهوه‌ای ملایم و خاکی */
+  --bg-start: #FFF5E1; /* شروع گرادینت گرم */
+  --bg-end: #EED5B7;   /* پایان گرادینت گرم */
+}
+
+/* --- تم سرد (Cold) --- */
+/* این کلاس به body اضافه می‌شود و رنگ‌های سرد را اعمال می‌کند */
+body.theme-cold {
+    --color-accent: #5F9EA0; /* آبی کدر/سبز دریایی ملایم - چشم‌نواز */
+    --bg-start: #E0F7FA; /* شروع گرادینت سرد */
+    --bg-end: #B2EBF2;   /* پایان گرادینت سرد */
+}
+
+/* --- تم غذا (Food) --- */
+/* این کلاس به body اضافه می‌شود و رنگ‌های غذا را اعمال می‌کند */
+body.theme-food {
+    --color-accent: #C86B4D; /* رنگ آجری/تراکوتا - گرم و اشتهاآور اما ملایم */
+    --bg-start: #FFF3E0; /* شروع گرادینت غذا */
+    --bg-end: #FFCCBC;   /* پایان گرادینت غذا */
+}
+
 
 /* Reset & Base */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'Vazirmatn', sans-serif;
-  background: linear-gradient(180deg, var(--color-bg), #f5e0c3);
+  /* استفاده از متغیرها برای گرادینت پس‌زمینه کل صفحه */
+  background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
   color: var(--color-text);
   display: flex;
   justify-content: center;
-  padding: 20px 0;
+  padding: 20px 15px;
   min-height: 100vh;
   overflow-x: hidden;
+  /* ترانزیشن بسیار نرم برای تغییر پس‌زمینه */
+  transition: background 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 /* --------------------
@@ -41,34 +72,38 @@ body {
   width: 100%;
   max-width: 580px;
   background: var(--color-card);
-  border-radius: 36px;
-  padding: 30px 24px;
+  border-radius: 40px;
+  padding: 35px 25px;
   box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(15px);
-  animation: menuIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: menuIn 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  /* ترانزیشن برای تغییرات داخلی (رنگ اکسنت‌ها) */
+  transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
-@keyframes menuIn { from { transform: translateY(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes menuIn { from { transform: translateY(30px) scale(0.98); opacity: 0; } to { transform: none; opacity: 1; } }
 
-/* Brand & Header (New Text) */
+/* Brand & Header */
 .brand {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 .brand h1 {
-  font-size: 34px;
+  font-size: 32px;
   font-weight: 800;
   color: var(--color-accent);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   letter-spacing: -0.5px;
   line-height: 1.1;
+  transition: color 0.8s ease;
 }
 .brand p {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--color-muted);
   font-weight: 500;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-  padding-bottom: 20px;
-  margin-bottom: 10px;
+  line-height: 1.6;
+  max-width: 80%;
+  margin: 0 auto 10px auto;
 }
 
 /* --------------------
@@ -77,38 +112,46 @@ body {
 .filter-bar {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin-bottom: 30px;
-  padding: 8px;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 35px;
+  padding: 5px;
 }
 
 .filter-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: 25px;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 30px;
   background: var(--color-section-bg);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  font-weight: 600;
+  border: 2px solid transparent;
+  font-weight: 700;
   font-size: 15px;
   color: var(--color-muted);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
   flex-shrink: 0;
+  box-shadow: var(--shadow-md);
 }
 
-.filter-btn:hover, .filter-btn.active {
+.filter-btn:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    color: var(--color-accent);
+}
+
+.filter-btn.active {
   background: var(--color-accent);
   color: white;
   border-color: var(--color-accent);
-  transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(139, 94, 60, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px -5px var(--color-accent); 
 }
 .filter-btn.active .filter-icon { color: #fff; }
 .filter-icon {
-    font-size: 18px;
-    transition: color 0.3s ease;
+    font-size: 20px;
+    transition: color 0.4s ease;
     color: var(--color-accent);
 }
 
@@ -118,45 +161,47 @@ body {
    -------------------- */
 .category {
   margin-bottom: 40px;
-  /* Hidden by default, shown by JS/filter */
   display: none; 
   opacity: 0;
-  transform: translateY(20px);
-  animation: slideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: slideUpFade 0.7s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
 }
-/* Re-enable animation for the first visible category */
 .category.active-cat {
-    display: block !important; /* Override 'display: none' */
-    opacity: 1; 
-    transform: none; 
+    display: block !important;
 }
-@keyframes slideIn { to { opacity: 1; transform: none; } }
+@keyframes slideUpFade { 
+    from { opacity: 0; transform: translateY(20px); } 
+    to { opacity: 1; transform: none; } 
+}
 
 .cat-title {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 800;
   color: var(--color-text);
-  margin-bottom: 18px;
-  padding-right: 10px;
-  border-right: 4px solid var(--color-accent); 
+  margin-bottom: 20px;
+  padding-right: 12px;
+  border-right: 5px solid var(--color-accent); 
+  transition: border-color 0.8s ease;
 }
 
-/* Item Card - Clean, Divided */
+/* Item Card */
 .item-card {
   display: flex;
   flex-direction: column;
-  padding: 18px;
-  border-radius: 18px;
-  margin-top: 10px;
+  padding: 20px;
+  border-radius: 24px;
+  margin-top: 12px;
   background: var(--color-section-bg);
-  box-shadow: var(--shadow-md);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(255,255,255,0.5);
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
   cursor: pointer;
 }
-
+.item-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: var(--shadow-md);
+}
 .item-card:active {
-  transform: scale(0.99);
-  background: rgba(255, 255, 255, 0.8);
+  transform: scale(0.98);
 }
 
 .item-main {
@@ -172,49 +217,50 @@ body {
   color: var(--color-text);
 }
 
-.price-wrap {
-    text-align: left; 
-}
+.price-wrap { text-align: left; }
 .price {
   font-weight: 800;
   color: var(--color-accent);
   font-size: 19px;
-  margin-right: 0;
+  transition: color 0.8s ease;
 }
 
 /* Details Dropdown */
 .details-dropdown {
-  padding-top: 10px;
-  margin-top: 10px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 0;
+  margin-top: 0;
   font-size: 14px;
   color: var(--color-muted);
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.7;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: all 0.4s ease-out;
+  transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 .item-card.expanded .details-dropdown {
-  max-height: 100px; 
+  padding-top: 15px;
+  margin-top: 15px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  max-height: 150px; 
   opacity: 1;
 }
 </style>
 </head>
 <body>
+
 <div class="menu-wrap">
 
 <div class="brand">
   <h1>منو کافه</h1>
-  <p>تجربه‌ای دلنشین از نوشیدنی‌های تازه و میان‌وعده‌های باکیفیت. خوش آمدید!</p>
+  <p>لحظاتی خوش با طعم‌های به یاد ماندنی. <br>نوع سفارش خود را انتخاب کنید.</p>
 </div>
 
 <div class="filter-bar">
   <div class="filter-btn" data-filter="hot"><span class="filter-icon">☕</span> گرم</div>
   <div class="filter-btn" data-filter="cold"><span class="filter-icon">🧊</span> سرد</div>
-  <div class="filter-btn" data-filter="dessert"><span class="filter-icon">🍰</span> دسر</div>
+  <div class="filter-btn" data-filter="food"><span class="filter-icon">🍲</span> غذا</div>
 </div>
 
 <div class="menu-content">
@@ -240,7 +286,7 @@ body {
           <div class="name-details"><div class="name">چای ماسالا</div></div>
           <div class="price-wrap"><div class="price">35 ت</div></div>
         </div>
-        <div class="details-dropdown">ترکیبی معطر از ادویه‌های هندی (دارچین، هل و زنجبیل) با شیر گرم. عالی برای رفع خستگی.</div>
+        <div class="details-dropdown">ترکیبی معطر از ادویه‌های هندی (دارچین، هل و زنجبیل) با شیر گرم.</div>
       </div>
       <div class="item-card">
         <div class="item-main">
@@ -248,13 +294,6 @@ body {
           <div class="price-wrap"><div class="price">60 ت</div></div>
         </div>
         <div class="details-dropdown">غلیظ و شیرین، با استفاده از پودر کاکائو با کیفیت و شیر تازه.</div>
-      </div>
-      <div class="item-card">
-        <div class="item-main">
-          <div class="name-details"><div class="name">چای سیاه ایرانی</div></div>
-          <div class="price-wrap"><div class="price">20 ت</div></div>
-        </div>
-        <div class="details-dropdown">ویژه و طبیعی. با هل و گل سرخ (قابل سفارش).</div>
       </div>
     </div>
   </div>
@@ -267,62 +306,62 @@ body {
           <div class="name-details"><div class="name">آیس آمریکانو</div></div>
           <div class="price-wrap"><div class="price">60 ت</div></div>
         </div>
-        <div class="details-dropdown">تند و خنک. ترکیب اسپرسو و آب سرد.</div>
+        <div class="details-dropdown">تند و خنک. ترکیب اسپرسو و آب سرد و یخ.</div>
       </div>
       <div class="item-card">
         <div class="item-main">
           <div class="name-details"><div class="name">آیس لاته</div></div>
           <div class="price-wrap"><div class="price">48 ت</div></div>
         </div>
-        <div class="details-dropdown">لطیف و سرد. شیر خنک با یک شات اسپرسو.</div>
+        <div class="details-dropdown">لطیف و سرد. شیر خنک با یک شات اسپرسو و فوم سرد.</div>
       </div>
       <div class="item-card">
         <div class="item-main">
-          <div class="name-details"><div class="name">موهیتو</div></div>
+          <div class="name-details"><div class="name">موهیتو کلاسیک</div></div>
           <div class="price-wrap"><div class="price">75 ت</div></div>
         </div>
-        <div class="details-dropdown">ترکیب کلاسیک کوبایی: نعناع تازه، آب لیموترش طبیعی و کمی شکر قهوه‌ای. خنک و ترش.</div>
+        <div class="details-dropdown">ترکیب تازگی نعناع، لیموترش، شکر قهوه‌ای و سودا.</div>
       </div>
       <div class="item-card">
         <div class="item-main">
           <div class="name-details"><div class="name">لیموناد نعنا</div></div>
           <div class="price-wrap"><div class="price">70 ت</div></div>
         </div>
-        <div class="details-dropdown">تازه و طراوت‌بخش. لیمو، آب گازدار و نعناع تازه.</div>
+        <div class="details-dropdown">نوشیدنی سنتی و طراوت‌بخش. آب لیموی تازه، نعناع و آب گازدار.</div>
       </div>
     </div>
   </div>
 
-  <div class="category" id="dessert" data-category="dessert">
-    <div class="cat-title">دسر و میان‌وعده</div>
+  <div class="category" id="food" data-category="food">
+    <div class="cat-title">غذاهای ویژه</div>
     <div class="items">
       <div class="item-card">
         <div class="item-main">
-          <div class="name-details"><div class="name">چیزکیک نیویورکی</div></div>
-          <div class="price-wrap"><div class="price">180 ت</div></div>
+          <div class="name-details"><div class="name">سوسیس بندری</div></div>
+          <div class="price-wrap"><div class="price">100 ت</div></div>
         </div>
-        <div class="details-dropdown">برشی غلیظ و خامه‌ای با پایه کراکری و وانیل خالص. پخته شده به روش سنتی نیویورک.</div>
+        <div class="details-dropdown">سوسیس تند و آتشین جنوبی، تفت داده شده با پیاز فراوان و سس مخصوص.</div>
       </div>
       <div class="item-card">
         <div class="item-main">
-          <div class="name-details"><div class="name">چیزکیک کلاسیک</div></div>
-          <div class="price-wrap"><div class="price">60 ت</div></div>
+          <div class="name-details"><div class="name">چیز برگر</div></div>
+          <div class="price-wrap"><div class="price">100 ت</div></div>
         </div>
-        <div class="details-dropdown">خامه‌ای و خوش‌طعم. با رویه سس بلوبری یا توت‌فرنگی (انتخابی).</div>
+        <div class="details-dropdown">۱۵۰ گرم گوشت خالص گوساله، پنیر گودا ذوب شده، کاهو، خیارشور و سس.</div>
       </div>
       <div class="item-card">
         <div class="item-main">
-          <div class="name-details"><div class="name">براونی شکلاتی</div></div>
-          <div class="price-wrap"><div class="price">30 ت</div></div>
+          <div class="name-details"><div class="name">فلافل مخصوص</div></div>
+          <div class="price-wrap"><div class="price">100 ت</div></div>
         </div>
-        <div class="details-dropdown">گرم و دلچسب. مغز شکلاتی آب شده، ایده‌آل با بستنی.</div>
+        <div class="details-dropdown">ساندویچ فلافل ترد و داغ با ادویه مخصوص، همراه با ترشی و سبزیجات.</div>
       </div>
-      <div class="item-card">
+       <div class="item-card">
         <div class="item-main">
-          <div class="name-details"><div class="name">کیک روز</div></div>
-          <div class="price-wrap"><div class="price">70 ت</div></div>
+          <div class="name-details"><div class="name">چیکن ماسالا</div></div>
+          <div class="price-wrap"><div class="price">100 ت</div></div>
         </div>
-        <div class="details-dropdown">اسفنجی / هویج / شکلاتی. روزانه تغییر می‌کند.</div>
+        <div class="details-dropdown">خوراک مرغ با سس غلیظ و پر ادویه هندی (کمی تند)، سرو با نان.</div>
       </div>
     </div>
   </div>
@@ -330,56 +369,82 @@ body {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  const menuWrap = document.querySelector('.menu-wrap'); // این المنت برای تغییرات داخلی منو استفاده می‌شود
   const categories = document.querySelectorAll('.category');
   const items = document.querySelectorAll('.item-card');
   const filterBtns = document.querySelectorAll('.filter-btn');
   const menuContent = document.querySelector('.menu-content');
-  const defaultCategory = 'hot'; // Set default category to 'hot'
+  const defaultCategory = 'hot';
 
-  // 1. Initial Category Animation Delay
+  // 1. Staggered Animation for Categories
   categories.forEach((el, i) => {
-    el.style.animationDelay = (i * 0.1) + 's';
+    el.style.animationDelay = (i * 0.05) + 's';
   });
 
   // 2. Item Details (Accordion)
   items.forEach(item => {
-    item.addEventListener('click', () => {
-      // Toggle current item's details
-      item.classList.toggle('expanded');
+    item.addEventListener('click', function() {
+      const currentlyExpanded = document.querySelector('.item-card.expanded');
+      if(currentlyExpanded && currentlyExpanded !== this) {
+          currentlyExpanded.classList.remove('expanded');
+      }
+      this.classList.toggle('expanded');
+      
+      if(this.classList.contains('expanded')) {
+          setTimeout(() => {
+              this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 300);
+      }
     });
   });
 
-  // 3. Filtering Logic (Simplified)
+  // 3. Filtering & Theming Logic
   const filterCategories = (filter) => {
-    // Remove active state and hide all categories
-    categories.forEach(cat => {
-      cat.classList.remove('active-cat');
-    });
+    // Reset active states
+    categories.forEach(cat => { cat.classList.remove('active-cat'); });
     filterBtns.forEach(b => b.classList.remove('active'));
 
-    // Find and show the target category
+    // Set new active states
     const targetCat = document.querySelector(`.category[data-category="${filter}"]`);
     const targetBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
 
     if (targetCat) {
-      targetCat.classList.add('active-cat'); // Uses the CSS class to show and animate
-      if (targetBtn) {
-          targetBtn.classList.add('active');
-      }
-      // Smooth scroll to the top of the menu content area
+      targetCat.classList.add('active-cat');
+      targetCat.style.animation = 'none';
+      targetCat.offsetHeight; 
+      targetCat.style.animation = null; 
+
+      if (targetBtn) targetBtn.classList.add('active');
       menuContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Apply Theme Classes for Dynamic Background & Colors
+    // اینجا هر دو المنت body و menuWrap را هدف قرار می‌دهیم
+    document.body.classList.remove('theme-hot', 'theme-cold', 'theme-food');
+    menuWrap.classList.remove('theme-hot', 'theme-cold', 'theme-food'); // برای رنگ‌های داخلی منو
+
+    if (filter === 'hot') {
+        document.body.classList.add('theme-hot');
+        menuWrap.classList.add('theme-hot');
+    } else if (filter === 'cold') {
+        document.body.classList.add('theme-cold');
+        menuWrap.classList.add('theme-cold');
+    } else if (filter === 'food') {
+        document.body.classList.add('theme-food');
+        menuWrap.classList.add('theme-food');
     }
   };
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      const filter = btn.getAttribute('data-filter');
-      filterCategories(filter);
+      filterCategories(btn.getAttribute('data-filter'));
     });
   });
   
-  // 4. Initial Load: Show the default category (HOT)
-  filterCategories(defaultCategory);
+  // 4. Initial Load
+  setTimeout(() => {
+    filterCategories(defaultCategory);
+  }, 100);
 
 });
 </script>
